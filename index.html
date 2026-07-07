@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sofia Cavazos Chavoya — Engineering Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:   #0D1B2A;
+    --steel:  #1C3A52;
+    --mid:    #2E5F82;
+    --accent: #4A9FBF;
+    --silver: #8BAFC4;
+    --light:  #D6E8F2;
+    --offwhite: #F4F8FB;
+    --white:  #FFFFFF;
+    --text:   #1A2A38;
+    --muted:  #5A7A92;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--offwhite);
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(13,27,42,0.96);
+    backdrop-filter: blur(8px);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 2.5rem;
+    height: 60px;
+    border-bottom: 1px solid rgba(74,159,191,0.2);
+  }
+  .nav-logo {
+    font-family: 'DM Serif Display', serif;
+    color: var(--white);
+    font-size: 1.1rem;
+    letter-spacing: 0.02em;
+  }
+  .nav-logo span { color: var(--accent); }
+  nav ul { list-style: none; display: flex; gap: 2rem; }
+  nav ul a {
+    color: var(--silver);
+    text-decoration: none;
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+  nav ul a:hover { color: var(--accent); }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    background: linear-gradient(160deg, var(--navy) 0%, var(--steel) 55%, var(--mid) 100%);
+    display: flex; align-items: center;
+    padding: 100px 2.5rem 3rem;
+    position: relative;
+    overflow: hidden;
+  }
+  #hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%234A9FBF' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    opacity: 1;
+  }
+  .hero-content { position: relative; max-width: 680px; }
+  .hero-eyebrow {
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 1.2rem;
+  }
+  .hero-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.8rem, 6vw, 5rem);
+    color: var(--white);
+    line-height: 1.05;
+    margin-bottom: 0.5rem;
+  }
+  .hero-name em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .hero-title {
+    font-size: 1rem;
+    color: var(--silver);
+    font-weight: 300;
+    letter-spacing: 0.04em;
+    margin-bottom: 1.8rem;
+  }
+  .hero-desc {
+    color: rgba(214,232,242,0.8);
+    font-size: 0.95rem;
+    line-height: 1.75;
+    max-width: 540px;
+    margin-bottom: 2.5rem;
+  }
+  .hero-pills { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 2.5rem; }
+  .pill {
+    background: rgba(74,159,191,0.12);
+    border: 1px solid rgba(74,159,191,0.3);
+    color: var(--light);
+    font-size: 0.75rem;
+    padding: 0.35rem 0.9rem;
+    border-radius: 999px;
+    letter-spacing: 0.04em;
+  }
+  .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--accent);
+    color: var(--navy);
+    padding: 0.75rem 1.8rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.85rem;
+    letter-spacing: 0.04em;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn-primary:hover { background: var(--light); transform: translateY(-1px); }
+  .btn-outline {
+    border: 1px solid var(--silver);
+    color: var(--silver);
+    padding: 0.75rem 1.8rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 0.04em;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+  .hero-stats {
+    position: absolute; right: 2.5rem; bottom: 3rem;
+    display: flex; gap: 2.5rem;
+  }
+  .stat { text-align: center; }
+  .stat-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2rem;
+    color: var(--white);
+    line-height: 1;
+  }
+  .stat-num span { color: var(--accent); }
+  .stat-label { font-size: 0.7rem; color: var(--silver); text-transform: uppercase; letter-spacing: 0.08em; }
+
+  /* ── SECTIONS ── */
+  section { padding: 5rem 2.5rem; }
+  .section-inner { max-width: 1100px; margin: 0 auto; }
+  .section-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+    color: var(--navy);
+    margin-bottom: 0.5rem;
+    line-height: 1.2;
+  }
+  .section-sub {
+    color: var(--muted);
+    font-size: 0.9rem;
+    max-width: 560px;
+    margin-bottom: 3rem;
+    line-height: 1.7;
+  }
+
+  /* ── PROJECT CARDS ── */
+  .projects-grid { display: grid; gap: 2rem; }
+  .project-card {
+    background: var(--white);
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid rgba(0,0,0,0.06);
+    box-shadow: 0 2px 16px rgba(13,27,42,0.06);
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+  .project-card:hover { transform: translateY(-4px); box-shadow: 0 8px 32px rgba(13,27,42,0.12); }
+
+  /* Full-width featured */
+  .project-card.featured {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .project-card.featured .card-gallery { height: 100%; min-height: 420px; }
+
+  .card-gallery {
+    position: relative;
+    overflow: hidden;
+    background: var(--navy);
+    height: 280px;
+  }
+  .card-gallery img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s;
+  }
+  .project-card:hover .card-gallery img { transform: scale(1.04); }
+  .gallery-thumbs {
+    position: absolute; bottom: 0.75rem; left: 0.75rem;
+    display: flex; gap: 0.4rem;
+  }
+  .gallery-thumbs img {
+    width: 52px; height: 40px;
+    object-fit: cover;
+    border-radius: 3px;
+    border: 2px solid var(--white);
+    cursor: pointer;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+  }
+  .gallery-thumbs img:hover { opacity: 1; }
+
+  .card-body { padding: 1.75rem; }
+  .card-tag {
+    display: inline-block;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--accent);
+    background: rgba(74,159,191,0.1);
+    padding: 0.25rem 0.7rem;
+    border-radius: 3px;
+    margin-bottom: 0.75rem;
+  }
+  .card-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.4rem;
+    color: var(--navy);
+    margin-bottom: 0.3rem;
+    line-height: 1.25;
+  }
+  .card-org {
+    font-size: 0.78rem;
+    color: var(--muted);
+    margin-bottom: 0.9rem;
+    letter-spacing: 0.02em;
+  }
+  .card-desc {
+    font-size: 0.875rem;
+    color: #3A5568;
+    line-height: 1.7;
+    margin-bottom: 1.2rem;
+  }
+  .card-chips { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.2rem; }
+  .chip {
+    font-size: 0.7rem;
+    background: var(--offwhite);
+    border: 1px solid var(--light);
+    color: var(--muted);
+    padding: 0.2rem 0.6rem;
+    border-radius: 3px;
+    letter-spacing: 0.03em;
+  }
+  .card-video {
+    background: var(--navy);
+    border-radius: 6px;
+    padding: 1rem;
+    display: flex; align-items: center; gap: 0.75rem;
+    margin-top: 1rem;
+    color: var(--silver);
+    font-size: 0.8rem;
+    font-style: italic;
+  }
+  .video-icon {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: rgba(74,159,191,0.2);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    font-size: 1rem;
+  }
+
+  /* 2-col grid for smaller cards */
+  .projects-2col { grid-template-columns: 1fr 1fr; }
+
+  /* ── SUBSECTIONS inside a project ── */
+  .sub-projects {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+  .sub-card {
+    background: var(--offwhite);
+    border: 1px solid var(--light);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .sub-card img {
+    width: 100%; height: 160px;
+    object-fit: cover; display: block;
+  }
+  .sub-card-body { padding: 0.9rem; }
+  .sub-card-title { font-size: 0.82rem; font-weight: 600; color: var(--navy); margin-bottom: 0.3rem; }
+  .sub-card-desc { font-size: 0.75rem; color: var(--muted); line-height: 1.55; }
+
+  /* ── AWARDS / IMPACT ── */
+  #awards { background: var(--navy); }
+  #awards .section-title { color: var(--white); }
+  #awards .section-sub { color: var(--silver); }
+  #awards .section-label { color: var(--accent); }
+
+  .awards-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; }
+  .award-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(74,159,191,0.2);
+    border-radius: 8px;
+    padding: 1.75rem;
+    display: flex; gap: 1rem; align-items: flex-start;
+  }
+  .award-icon { font-size: 2rem; flex-shrink: 0; line-height: 1; }
+  .award-title { font-weight: 600; color: var(--white); font-size: 0.9rem; margin-bottom: 0.3rem; }
+  .award-detail { font-size: 0.78rem; color: var(--silver); line-height: 1.55; }
+
+  .award-photo-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+  .award-photo {
+    border-radius: 8px; overflow: hidden;
+    border: 1px solid rgba(74,159,191,0.2);
+    position: relative;
+  }
+  .award-photo img { width: 100%; height: 320px; object-fit: cover; display: block; }
+  .award-photo-caption {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    background: linear-gradient(transparent, rgba(13,27,42,0.9));
+    color: var(--light);
+    font-size: 0.78rem;
+    padding: 1.5rem 1rem 1rem;
+  }
+
+  /* ── SKILLS ── */
+  #skills { background: var(--white); }
+  .skills-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; }
+  .skill-group { padding: 1.5rem; border: 1px solid var(--light); border-radius: 8px; }
+  .skill-group-title {
+    font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--accent); font-weight: 600; margin-bottom: 0.9rem;
+  }
+  .skill-item {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--offwhite);
+    font-size: 0.82rem;
+    color: var(--text);
+  }
+  .skill-item:last-child { border-bottom: none; }
+  .skill-dots { display: flex; gap: 3px; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--light); }
+  .dot.filled { background: var(--accent); }
+
+  /* ── CONTACT ── */
+  #contact {
+    background: linear-gradient(135deg, var(--steel) 0%, var(--navy) 100%);
+    text-align: center;
+  }
+  #contact .section-title { color: var(--white); }
+  #contact .section-sub { color: var(--silver); margin: 0 auto 2.5rem; }
+  .contact-links { display: flex; justify-content: center; gap: 1.2rem; flex-wrap: wrap; }
+  .contact-link {
+    display: flex; align-items: center; gap: 0.5rem;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(74,159,191,0.25);
+    color: var(--light);
+    text-decoration: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    font-size: 0.82rem;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .contact-link:hover { background: rgba(74,159,191,0.15); border-color: var(--accent); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--navy);
+    text-align: center;
+    padding: 1.5rem;
+    font-size: 0.75rem;
+    color: var(--muted);
+    border-top: 1px solid rgba(255,255,255,0.05);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .project-card.featured { grid-template-columns: 1fr; }
+    .project-card.featured .card-gallery { height: 280px; }
+    .projects-2col { grid-template-columns: 1fr; }
+    .sub-projects { grid-template-columns: 1fr 1fr; }
+    .awards-grid { grid-template-columns: 1fr 1fr; }
+    .skills-grid { grid-template-columns: 1fr 1fr; }
+    .hero-stats { position: static; margin-top: 3rem; justify-content: flex-start; }
+    nav ul { display: none; }
+  }
+  @media (max-width: 600px) {
+    section { padding: 3.5rem 1.25rem; }
+    nav { padding: 0 1.25rem; }
+    .sub-projects { grid-template-columns: 1fr; }
+    .awards-grid { grid-template-columns: 1fr; }
+    .skills-grid { grid-template-columns: 1fr; }
+    .award-photo-row { grid-template-columns: 1fr; }
+  }
+
+  /* scroll fade-in */
+  .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Sofia <span>Cavazos</span></div>
+  <ul>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#awards">Awards</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-content">
+    <p class="hero-eyebrow">Mechanical & Mechatronic Engineer</p>
+    <h1 class="hero-name">Sofia<br>Cavazos <em>Chavoya</em></h1>
+    <p class="hero-title">B.Sc. Mechatronics · Tecnológico de Monterrey · Class of 2026</p>
+    <p class="hero-desc">
+      Structural designer for a CubeSat at Kyutech Japan. Lead engineer on an industrial welding cobot system. Published researcher at SSSIF 2025. I design things that must survive — in orbit, on a factory floor, or both.
+    </p>
+    <div class="hero-pills">
+      <span class="pill">SolidWorks · 3 yrs</span>
+      <span class="pill">Fusion 360 · 2 yrs</span>
+      <span class="pill">CNC Machining</span>
+      <span class="pill">Stress & Thermal Analysis</span>
+      <span class="pill">JAXA / NASA Standards</span>
+      <span class="pill">MIG & SMAW Welding</span>
+    </div>
+    <div class="hero-cta">
+      <a href="#projects" class="btn-primary">View Projects</a>
+      <a href="mailto:soficavazos@hotmail.com" class="btn-outline">Get in Touch</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="stat"><div class="stat-num">3<span>+</span></div><div class="stat-label">Years CAD</div></div>
+    <div class="stat"><div class="stat-num">6<span>+</span></div><div class="stat-label">Companies</div></div>
+    <div class="stat"><div class="stat-num">1<span>st</span></div><div class="stat-label">Author SSSIF</div></div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+<div class="section-inner">
+  <p class="section-label">Engineering Portfolio</p>
+  <h2 class="section-title">Selected Projects</h2>
+  <p class="section-sub">From space structures to industrial cobots — every project here was designed, analyzed, and documented from scratch.</p>
+
+  <div class="projects-grid">
+
+    <!-- ── KYUTECH FEATURED ── -->
+    <div class="project-card featured fade-in">
+      <div class="card-gallery">
+        <img id="kyutech-main" src="assets/kyutech_render1.png" alt="CubeSat render">
+        <div class="gallery-thumbs">
+          <img src="assets/kyutech_render1.png" onclick="swap('kyutech-main',this.src)" alt="">
+          <img src="assets/kyutech_render2.png" onclick="swap('kyutech-main',this.src)" alt="">
+          <img src="assets/kyutech_cad.png" onclick="swap('kyutech-main',this.src)" alt="">
+          <img src="assets/kyutech_safety.png" onclick="swap('kyutech-main',this.src)" alt="">
+          <img src="assets/kyutech_vibration.png" onclick="swap('kyutech-main',this.src)" alt="">
+        </div>
+      </div>
+      <div class="card-body">
+        <span class="card-tag">🛰 Space Structures · Research Internship</span>
+        <h3 class="card-title">CubeSat Structural Design — Kyutech</h3>
+        <p class="card-org">Kyushu Institute of Technology · Kitakyushu, Japan · Oct 2025 – Jan 2026</p>
+        <p class="card-desc">
+          Sole responsible for the complete structural subsystem of a CubeSat, from concept through Mission Definition Review (MDR). Followed JAXA and NASA mechanical standards throughout. Delivered full CAD package, technical drawings, BOMs, and stress & vibration analysis for formal international design review.
+        </p>
+        <div class="sub-projects">
+          <div class="sub-card">
+            <img src="assets/kyutech_safety.png" alt="Safety factor analysis">
+            <div class="sub-card-body">
+              <div class="sub-card-title">Structural Analysis</div>
+              <div class="sub-card-desc">Safety factor >8 — frame passes launch load requirements per JAXA standards.</div>
+            </div>
+          </div>
+          <div class="sub-card">
+            <img src="assets/kyutech_vibration.png" alt="Vibration modal analysis">
+            <div class="sub-card-body">
+              <div class="sub-card-title">Vibration Analysis</div>
+              <div class="sub-card-desc">Modal analysis — first natural frequency: 723 Hz, well above launch environment threshold.</div>
+            </div>
+          </div>
+          <div class="sub-card">
+            <img src="assets/endurosat1.png" alt="EnduroSat panel holder">
+            <div class="sub-card-body">
+              <div class="sub-card-title">EnduroSat Panel Fixture</div>
+              <div class="sub-card-desc">Structure to hold EnduroSat panels for testing — SolidWorks design with tolerance analysis.</div>
+            </div>
+          </div>
+        </div>
+        <div class="sub-projects" style="margin-top:1rem;">
+          <div class="sub-card">
+            <img src="assets/bio_chamber1.png" alt="Biopayload chamber">
+            <div class="sub-card-body">
+              <div class="sub-card-title">Biopayload Chamber</div>
+              <div class="sub-card-desc">Sealed growth chamber designed to sustain a plant through the full mission — thermal control, humidity, and lighting subsystems.</div>
+            </div>
+          </div>
+          <div class="sub-card">
+            <img src="assets/bio_chamber2.png" alt="Biopayload section view">
+            <div class="sub-card-body">
+              <div class="sub-card-title">Subsystem Integration</div>
+              <div class="sub-card-desc">Section view showing component layout: water reservoir, ventilation, PCB, and sensor mounting.</div>
+            </div>
+          </div>
+          <div class="sub-card" style="display:flex;align-items:center;justify-content:center;min-height:160px;background:var(--navy);">
+            <div class="card-video" style="background:transparent;flex-direction:column;text-align:center;">
+              <div class="video-icon" style="margin:0 auto 0.5rem;">▶</div>
+              <div style="color:var(--silver);font-size:0.75rem;">Biopayload video<br><em>coming soon</em></div>
+            </div>
+          </div>
+        </div>
+        <div class="card-chips" style="margin-top:1.2rem;">
+          <span class="chip">Fusion 360</span><span class="chip">SolidWorks</span><span class="chip">FEA</span>
+          <span class="chip">Modal Analysis</span><span class="chip">JAXA Standards</span><span class="chip">NASA GEVS</span>
+          <span class="chip">BOMs</span><span class="chip">MDR</span>
+        </div>
+        <p style="font-size:0.78rem;color:var(--accent);font-weight:600;">📄 Paper accepted — SSSIF 2025 &amp; selected for SSSIF 2026</p>
+      </div>
+    </div>
+
+    <!-- ── ADICOM ── -->
+    <div class="project-card featured fade-in">
+      <div class="card-gallery">
+        <img id="adicom-main" src="assets/adicom_3d.png" alt="Adicom welding station 3D">
+        <div class="gallery-thumbs">
+          <img src="assets/adicom_3d.png" onclick="swap('adicom-main',this.src)" alt="">
+          <img src="assets/adicom_stress.png" onclick="swap('adicom-main',this.src)" alt="">
+          <img src="assets/adicom_safety.png" onclick="swap('adicom-main',this.src)" alt="">
+          <img src="assets/adicom_physical.jpeg" onclick="swap('adicom-main',this.src)" alt="">
+          <img src="assets/adicom_expo.jpeg" onclick="swap('adicom-main',this.src)" alt="">
+        </div>
+      </div>
+      <div class="card-body">
+        <span class="card-tag">🔩 Industrial Design · Industry Project</span>
+        <h3 class="card-title">Welding Torch Holder — UR5e Cobot</h3>
+        <p class="card-org">Adicom · Tecnológico de Monterrey · Feb – Jun 2026</p>
+        <p class="card-desc">
+          End-to-end design of a gripper/holder to mount an industrial welding torch on a Universal Robots UR5e cobot arm. Designed the full mechanical assembly in SolidWorks, ran stress and thermal simulation to validate performance under welding conditions, and delivered production-ready drawings and BOMs for industrial deployment.
+        </p>
+        <div class="sub-projects">
+          <div class="sub-card">
+            <img src="assets/adicom_stress.png" alt="Stress analysis">
+            <div class="sub-card-body">
+              <div class="sub-card-title">Thermal Stress Analysis</div>
+              <div class="sub-card-desc">Heat distribution along torch under welding load — max stress at torch interface, base structure remains in safe zone.</div>
+            </div>
+          </div>
+          <div class="sub-card">
+            <img src="assets/adicom_safety.png" alt="Safety factor">
+            <div class="sub-card-body">
+              <div class="sub-card-title">Static Safety Factor</div>
+              <div class="sub-card-desc">Minimum safety factor 102 — structure exceeds mechanical requirements for robotic arm mounting.</div>
+            </div>
+          </div>
+          <div class="sub-card">
+            <img src="assets/adicom_physical.jpeg" alt="Physical station">
+            <div class="sub-card-body">
+              <div class="sub-card-title">Physical Assembly</div>
+              <div class="sub-card-desc">Complete welding station with UR5e cobot, pneumatic fixture, and torch holder deployed and tested at Adicom facility.</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-chips" style="margin-top:1.2rem;">
+          <span class="chip">SolidWorks</span><span class="chip">FEA</span><span class="chip">Thermal Simulation</span>
+          <span class="chip">Universal Robots UR5e</span><span class="chip">DFM</span><span class="chip">BOMs</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── ABB + COBOTS 2-col ── -->
+    <div class="projects-grid projects-2col">
+
+      <!-- ABB -->
+      <div class="project-card fade-in">
+        <div class="card-gallery">
+          <img id="abb-main" src="assets/abb_plant.png" alt="ABB plant design">
+          <div class="gallery-thumbs">
+            <img src="assets/abb_plant.png" onclick="swap('abb-main',this.src)" alt="">
+            <img src="assets/abb_grippers.png" onclick="swap('abb-main',this.src)" alt="">
+            <img src="assets/abb_simulation.png" onclick="swap('abb-main',this.src)" alt="">
+          </div>
+        </div>
+        <div class="card-body">
+          <span class="card-tag">🤖 Robotics & Automation</span>
+          <h3 class="card-title">ABB Robotic Production Line</h3>
+          <p class="card-org">Tec de Monterrey · Jan – Jun 2025</p>
+          <p class="card-desc">Programmed an ABB robot in RobotStudio (offline) for classification and palletizing. Designed custom gripper end-effector. Integrated Cognex vision + Siemens-controlled conveyor. Built Digital Twin for cycle-time optimization.</p>
+          <div class="card-chips">
+            <span class="chip">ABB RobotStudio</span><span class="chip">Offline Programming</span>
+            <span class="chip">Cognex Vision</span><span class="chip">Siemens</span><span class="chip">Gripper Design</span>
+          </div>
+          <div class="card-video">
+            <div class="video-icon">▶</div>
+            <span>Simulation video — add your YouTube link here</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- COBOTS CON CORAZÓN -->
+      <div class="project-card fade-in">
+        <div class="card-gallery" style="background:linear-gradient(135deg,#1C3A52,#2E5F82);">
+          <img src="assets/cobots_team.png" alt="Cobots con Corazón team" style="object-fit:cover;opacity:0.9;">
+        </div>
+        <div class="card-body">
+          <span class="card-tag">💙 Social Impact · Research</span>
+          <h3 class="card-title">Cobots con Corazón</h3>
+          <p class="card-org">Social Service · Tec de Monterrey · 2023 – 2024 · 180 hrs</p>
+          <p class="card-desc">
+            First development stage of a project integrating virtual reality with collaborative robot arms to enable people with cognitive disabilities to perform productive work tasks. Contributed to hardware-software interface research, documentation, and system architecture for the VR-cobot interaction layer.
+          </p>
+          <div class="card-chips">
+            <span class="chip">Cobot Integration</span><span class="chip">VR Interface</span>
+            <span class="chip">Accessibility Tech</span><span class="chip">Research</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- end 2col -->
+
+  </div>
+</div>
+</section>
+
+<!-- AWARDS -->
+<section id="awards">
+<div class="section-inner">
+  <p class="section-label">Recognition</p>
+  <h2 class="section-title">Awards & Leadership</h2>
+  <p class="section-sub">International competition medals, a published research paper, and leading a student organization to the global stage.</p>
+
+  <div class="awards-grid fade-in">
+    <div class="award-card">
+      <div class="award-icon">🥉</div>
+      <div>
+        <div class="award-title">Bronze Medal — ISSSP 2024</div>
+        <div class="award-detail">International Space Science & Scientific Payload Competition · Hong Kong, China · Aug 2024 · Represented Tecnológico de Monterrey</div>
+      </div>
+    </div>
+    <div class="award-card">
+      <div class="award-icon">📄</div>
+      <div>
+        <div class="award-title">Published — SSSIF 2025</div>
+        <div class="award-detail">Co-author of paper on CubeSat mechanical structure design, accepted and presented at the Small Satellites & Services International Forum · 2025</div>
+      </div>
+    </div>
+    <div class="award-card">
+      <div class="award-icon">🚀</div>
+      <div>
+        <div class="award-title">Selected — SSSIF 2026</div>
+        <div class="award-detail">Invited again to present research at the 2026 SSSIF Forum — pending presentation</div>
+      </div>
+    </div>
+    <div class="award-card">
+      <div class="award-icon">👩‍💼</div>
+      <div>
+        <div class="award-title">President — Space Makers</div>
+        <div class="award-detail">Led Tec de Monterrey's aerospace student organization · Jan – Dec 2025 · Previously Vice-President Aug–Dec 2024</div>
+      </div>
+    </div>
+    <div class="award-card">
+      <div class="award-icon">🏆</div>
+      <div>
+        <div class="award-title">1st Place — Robotics Tournament</div>
+        <div class="award-detail">Inter-High School Robotics Tournament · April 2022 · Preparatoria #20</div>
+      </div>
+    </div>
+    <div class="award-card">
+      <div class="award-icon">🎓</div>
+      <div>
+        <div class="award-title">Lean Six Sigma White Belt</div>
+        <div class="award-detail">Certified by Tecnológico de Monterrey · 2025</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="award-photo-row fade-in">
+    <div class="award-photo">
+      <img src="assets/isssp_award.jpeg" alt="ISSSP 2024 Hong Kong award">
+      <div class="award-photo-caption">🥉 ISSSP 2024 · International Space Science Competition · Hong Kong</div>
+    </div>
+    <div class="award-photo" style="display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.04);border:1px dashed rgba(74,159,191,0.3);">
+      <div style="text-align:center;color:var(--silver);padding:2rem;">
+        <div style="font-size:2rem;margin-bottom:0.75rem;">📸</div>
+        <div style="font-size:0.85rem;">Space Makers photos<br><em style="font-size:0.75rem;">Add your photos here</em></div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+<div class="section-inner">
+  <p class="section-label">Technical Profile</p>
+  <h2 class="section-title">Skills & Tools</h2>
+  <p class="section-sub">Hands-on across the full engineering cycle — from CAD and simulation to manufacturing and industrial automation.</p>
+
+  <div class="skills-grid fade-in">
+    <div class="skill-group">
+      <div class="skill-group-title">CAD & Design</div>
+      <div class="skill-item">SolidWorks <div class="skill-dots"><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div></div></div>
+      <div class="skill-item">Fusion 360 <div class="skill-dots"><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div></div></div>
+      <div class="skill-item">Technical Drawings & BOMs <div class="skill-dots"><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div></div></div>
+      <div class="skill-item">Tolerance & Fit Analysis <div class="skill-dots"><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div><div class="dot"></div></div></div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Analysis & Simulation</div>
+      <div class="skill-item">SolidWorks Simulation (FEA) <div class="skill-dots"><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div><div class="dot"></div></div></div>
+      <div class="skill-item">Thermal Analysis <div class="skill-dots"><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div><div class="dot"></div></div></div>
+      <div class="skill-item">Ansys <div class="skill-dots"><div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div></div>
+      <div class="skill-item">Matlab / Simulink <div class="skill-dots"><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div><div class="dot"></div></div></div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Manufacturing</div>
+      <div class="skill-item">CNC Milling (G-code + CAM) <div class="skill-dots"><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div><div class="dot"></div></div></div>
+      <div class="skill-item">MIG & SMAW Welding <div class="skill-dots"><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div><div class="dot"></div></div></div>
+      <div class="skill-item">3D Printing (FDM) <div class="skill-dots"><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div></div></div>
+      <div class="skill-item">Laser Cutting <div class="skill-dots"><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div><div class="dot"></div></div></div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Robotics & Automation</div>
+      <div class="skill-item">ABB RobotStudio (offline) <div class="skill-dots"><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div><div class="dot"></div></div></div>
+      <div class="skill-item">Universal Robots (UR5e) <div class="skill-dots"><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div><div class="dot"></div></div></div>
+      <div class="skill-item">Siemens TIA Portal <div class="skill-dots"><div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div></div>
+      <div class="skill-item">FluidSim (Pneumatics) <div class="skill-dots"><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div><div class="dot"></div></div></div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Standards & Process</div>
+      <div class="skill-item">JAXA Mechanical Standards <div class="skill-dots"><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div><div class="dot"></div></div></div>
+      <div class="skill-item">NASA GEVS <div class="skill-dots"><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div><div class="dot"></div></div></div>
+      <div class="skill-item">Lean Six Sigma (White Belt) <div class="skill-dots"><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div><div class="dot"></div></div></div>
+      <div class="skill-item">GD&T / ASME Y14.5 <div class="skill-dots"><div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div></div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Languages</div>
+      <div class="skill-item">Spanish <div class="skill-dots"><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div></div></div>
+      <div class="skill-item">English (B2) <div class="skill-dots"><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div></div></div>
+      <div class="skill-item">German (A1.1) <div class="skill-dots"><div class="dot filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div></div>
+      <div class="skill-item">Japanese (basic) <div class="skill-dots"><div class="dot filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div></div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+<div class="section-inner">
+  <p class="section-label">Let's Connect</p>
+  <h2 class="section-title">Get in Touch</h2>
+  <p class="section-sub">Open to engineering roles, research collaborations, and internship opportunities in mechanical design, aerospace, and industrial automation.</p>
+  <div class="contact-links">
+    <a href="mailto:soficavazos@hotmail.com" class="contact-link">✉️ soficavazos@hotmail.com</a>
+    <a href="https://linkedin.com/in/sofia-cavazos" target="_blank" class="contact-link">💼 LinkedIn</a>
+    <a href="tel:+528132537670" class="contact-link">📞 +52 81-32-53-76-70</a>
+  </div>
+</div>
+</section>
+
+<footer>
+  © 2026 Sofia Cavazos Chavoya · Mechatronic Engineering · Tecnológico de Monterrey
+</footer>
+
+<script>
+  // Gallery swap
+  function swap(mainId, src) {
+    document.getElementById(mainId).src = src;
+  }
+
+  // Scroll fade-in
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
